@@ -1,0 +1,32 @@
+<% if user_signed_in? %>
+  <h1>Friends</h1>
+
+  <div id="friends">
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <% if user_signed_in? %>
+            <% if @friends.count > 1 %>
+              <th><strong>Name</strong></th>
+              <th><strong>Email</strong></th>
+              <th><strong>Phone</strong></th>
+              <th><strong>Instagram</strong></th>
+              <th colspan="2"></th>
+            <% end %>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @friends.each do |friend| %>
+          <% if friend.user == current_user %>
+            <%= render friend %>
+          <% end %>
+        <% end %> 
+      </tbody>
+    </table>
+  </div>
+
+  <%= link_to "Add new friend", new_friend_path, class:"btn btn-primary" %>
+<% else %>
+  <h1>Please log in.</h1>
+<% end %>
